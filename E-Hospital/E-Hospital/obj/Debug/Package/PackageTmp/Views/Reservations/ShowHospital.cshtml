@@ -1,0 +1,72 @@
+﻿@model Tuple<E_Hospital.Models.Doctor, E_Hospital.Models.Hospital>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Doctor and Hospital</h2>
+<br/>
+<div>
+    <h4>Doctor's Details:</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Item1.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Item1.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.Speciality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.Speciality)
+        </dd>
+        <br/>
+        <h4>Hospital's Details:</h4>
+        <dl class="coordinates">
+            <dt>@Html.DisplayNameFor(model => model.Item2.HospitalName)</dt>
+            <dd class="description">
+                @Html.DisplayFor(model => model.Item2.HospitalName)
+            </dd>
+            <dt>@Html.DisplayNameFor(model => model.Item2.Description)</dt>
+            <dd class="title">
+                @Html.DisplayFor(model => model.Item2.Description)
+            </dd>
+            <dd style="display: none" class="latitude">
+                @Html.DisplayFor(model => model.Item2.Latitude)
+            </dd>
+            <dd style="display: none" class="longitude">
+                @Html.DisplayFor(model => model.Item2.Longitude)
+            </dd>
+        
+        </dl>
+        <dt>Map for the location:</dt>
+        <dd id="map" style="height: 300px; width: 70%"></dd>
+    </dl>
+    
+    
+</div>
+<br/>
+<p>
+    @Html.ActionLink("Back To Reservation List", "Index")
+</p>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/mapbox")
+}
+

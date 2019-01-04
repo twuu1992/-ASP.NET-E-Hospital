@@ -1,0 +1,81 @@
+﻿@using E_Hospital.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@model IEnumerable<E_Hospital.Models.Reservation>
+@{
+    ViewBag.Title = "ConfirmList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Of Unconfirmed Reservations</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th>
+                
+                @Html.DisplayName("Patient")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var fullName = item.Doctor.LastName + " " + item.Doctor.FirstName;
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.PatientId);
+            var email = user.Email;
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => fullName)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Confirm", "ConfirmStatus", new { id = item.Id }, new { style = "color: red" })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables/bootstrap.js")
+
+    <script>
+
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

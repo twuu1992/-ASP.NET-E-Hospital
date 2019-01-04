@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ShowCalendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Calendar</h2>
+
+<h5 style="padding: 10px 10px 10px 10px;background-color:blanchedalmond">Note: Don't miss your reservation. If you cannot attend it, please reschedule it.</h5>
+<br />
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="calender"></div>
+ 
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="pDetails"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print"/>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/fullcalendar")
+    
+}

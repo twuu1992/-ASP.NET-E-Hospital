@@ -1,0 +1,33 @@
+﻿@model E_Hospital.Models.Reservation
+@{
+    ViewBag.Title = "ConfirmStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Please make sure to confirm this reservation</h2>
+<br/>
+
+
+
+<div class="col-md-10">
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="Id" value="@ViewBag.Id"/>
+        <input type="hidden" name="PatientId" value="@ViewBag.PatientId" />
+        <input type="hidden" name="DoctorId" value="@ViewBag.DoctorId" />
+        <input type="hidden" name="Date" value="@ViewBag.Date" />
+        <input type="hidden" name="Description" value="@ViewBag.Description" />
+        <input type="hidden" name="Status" value="Confirmed" />
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-default" />
+        </div>
+    }
+
+</div>
+<br />
+<p>
+    @Html.ActionLink("Back To Reservation List", "ConfirmList")
+</p>

@@ -1,0 +1,108 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<E_Hospital.Models.Reservation>
+
+@{
+    ViewBag.Title = "Your Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Your Reservation List:</h2>
+
+<h5 style="padding: 10px 10px 10px 10px;background-color:blanchedalmond">Note: Click "More Details" to know where the hospital is. Also you can reschedule your reservation, but it need to be confirmed once you do so.</h5>
+<br/>
+<hr/>
+<table id="table2" class="row-border hover" style="width: 100%">
+    <thead>
+    <tr>
+        <th>
+            
+            @Html.DisplayNameFor(model => model.Doctor)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        var fullName = item.Doctor.LastName + " " + item.Doctor.FirstName;
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => fullName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+                @Html.ActionLink("More Details", "ShowHospital", new {id = item.DoctorId}, new {style="text-decoration:none; color: green"}) ||
+                @Html.ActionLink("Reschedule", "Edit", new {id = item.Id}, new {
+                    style = "text-decoration:none; color: blue"}) ||
+                @*@Html.ActionLink("Details", "Details", new {id = item.Id}) |*@
+                @Html.ActionLink("Cancel", "Delete", new {id = item.Id}, new
+                {
+                    style = "text-decoration:none; color: red"
+                })
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.Doctor)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+
+        <th></th>
+    </tr>
+    </tfoot>
+</table>
+<hr />
+<br/>
+<p>
+    @Html.ActionLink("Create A New Reservation", "SelectDoctor")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables/bootstrap.js")
+    
+    <script>
+        $(document).ready(function() {
+            $('#table2').DataTable();
+        } );
+    </script>
+}
+
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+          rel="stylesheet" />

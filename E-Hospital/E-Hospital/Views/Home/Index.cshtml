@@ -1,0 +1,70 @@
+﻿@model IEnumerable<E_Hospital.Models.Reservation>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .btn {
+        background-color: transparent;
+        border: solid;
+        color: black;
+        box-shadow: grey 5px;
+        display: flex;
+        justify-content: center;
+        width: 20%;
+        display: inline
+    }
+
+        .btn:hover, btn-primary:hover, btn-lg:hover {
+            background-color: transparent;
+            color: blueviolet;
+        }
+
+    .jumbotron {
+        position: relative;
+        z-index: 1;
+    }
+
+        .jumbotron:before {
+            content: "";
+            background-image: url("../../background-1.jpg");
+            position: absolute;
+            z-index: -1;
+            background-color: lightgrey;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0.4;
+            background-size: cover;
+        }
+</style>
+
+<div class="jumbotron">
+
+    <h1 style="padding: 5px 5px 5px 5px; border:thick; text-align: center">E-Hospital</h1>
+    <hr style="color: black; height: 2px" />
+    <br />
+    <p class="lead">E-Hospital is a website which helps users to make the medical reservations and get the direction towards the hospital.</p>
+    <br />
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p class="middle">There are only two steps to book a reservation:</p>
+        <p class="middle">1. Choose your doctor. </p><p class="middle">2. Select a time you like.</p>
+        <p><a href="~/Reservations/SelectDoctor" class="btn btn-primary btn-lg">Make An Reservation &raquo;</a></p>
+        <br />
+
+
+
+    }
+    else
+    {
+        <p>Join Us:</p><br />
+        <p>
+            <a href="~/Account/Register" class="btn btn-primary btn-lg">Register &raquo;</a>
+            <a href="~/Account/Login" class="btn btn-primary btn-lg">Login &raquo;</a>
+        </p>
+    }
+
+</div>

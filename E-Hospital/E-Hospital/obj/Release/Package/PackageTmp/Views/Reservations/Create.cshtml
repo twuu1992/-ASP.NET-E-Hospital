@@ -1,0 +1,132 @@
+﻿@model E_Hospital.Models.Reservation
+
+@{
+    ViewBag.Title = "Select A Time";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Create A Reservation</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10" style="font-weight: bold; left: 7.5%">You selected the doctor:</div>
+
+            <div class="col-md-10" style="left: 7%; padding: 10px 20px 10px 20px; color: grey">
+                @ViewBag.DoctorTitle
+            </div>
+
+        </div>
+
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-10" style="left: 7.5%">
+
+                @Html.LabelFor(model => model.Date, "Date Of Appointment")
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepicker" } })
+
+
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Status)
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.PatientId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PatientId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.DoctorId, "DoctorId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DoctorId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DoctorId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <input type="hidden" name="PatientId" value="@ViewBag.PatientId" />
+        <input type="hidden" name="DoctorId" value="@ViewBag.DoctorId" />
+        <input type="hidden" name="Status" value="Not Confirmed" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "SelectDoctor")
+</div>
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+
+            var dateList = @Html.Raw(Json.Encode(ViewBag.ConflictDates));
+            var beforeShowDay = function disableDate(date) {
+                var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                return [$.inArray(string, dateList) === -1];
+            };
+
+            $(".datepicker").datepicker({
+
+                
+                dateFormat: "dd/mm/yy",
+                minDate: 0,
+                beforeShowDay: beforeShowDay
+        });
+        })
+    </script>
+}

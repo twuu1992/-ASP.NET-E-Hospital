@@ -1,0 +1,77 @@
+﻿@model E_Hospital.Models.Reservation
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reschedule The Reservation</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Date, "The Previous Date:")<br />
+            <div class="col-md-10" style="padding: 10px 20px 10px 20px; color: grey">
+                @ViewBag.PreviousDate
+            </div><br />
+            @Html.LabelFor(model => model.Date, "Enter The New Date:", new { style = "padding: 10px 20px 10px 20px" })
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepicker" } })
+
+
+        </div>
+
+    </div>
+    <input type="hidden" name="Id" value="@ViewBag.Id"/>
+    <input type="hidden" name="PatientId" value="@ViewBag.PatientId" />
+    <input type="hidden" name="DoctorId" value="@ViewBag.DoctorId" />
+    <input type="hidden" name="Status" value="Not Confirmed" />
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to My Reservations", "Index")
+</div>
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function() {
+
+            var dateList = @Html.Raw(Json.Encode(ViewBag.ConflictDates));
+            var beforeShowDay = function disableDate(date) {
+                var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                return [$.inArray(string, dateList) === -1];
+            };
+
+            $(".datepicker").datepicker({
+                dateFormat: "dd/MM/yy",
+                minDate: 0,
+                beforeShowDay: beforeShowDay
+            });
+        })
+    </script>
+}

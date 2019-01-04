@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\Tony Wu\Desktop\FIT5032\PROJECT\E-Hospital_v3.0\E-Hospital\E-Hospital\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\Tony Wu\Desktop\FIT5032\PROJECT\E-Hospital_v3.0\E-Hospital\E-Hospital\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Tony Wu\Desktop\FIT5032\PROJECT\E-Hospital_v3.0\E-Hospital\E-Hospital\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Tony Wu\Desktop\FIT5032\PROJECT\E-Hospital_v3.0\E-Hospital\E-Hospital\obj\Release\Package\PackageTmp\App_Data" setAclResourceType="Directory" setAclAccess="Write" />
+</sitemanifest>
